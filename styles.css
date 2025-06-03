@@ -1,0 +1,124 @@
+:root {
+    --color-bg: #000015;
+    --color-text: #C0C0C0;
+    --color-neon-blue: #00ADEF;
+    --color-royal-blue: #1E90FF;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Orbitron', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.xenos-chat-section {
+    background: rgba(10, 16, 38, 0.88);
+    padding: 80px 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.xenos-chat-container {
+    max-width: 800px;
+    width: 100%;
+    background: #0b0d2a;
+    border-radius: 24px;
+    padding: 44px 36px;
+    box-shadow: 0 0 44px #00adef44;
+    color: var(--color-text);
+    text-align: center;
+    backdrop-filter: blur(2px);
+}
+
+.xenos-chat-title {
+    font-size: 1.8rem;
+    color: var(--color-neon-blue);
+    margin-bottom: 18px;
+    text-shadow: 0 0 16px #00adefaa;
+}
+
+.xenos-chat-desc {
+    font-size: 1.03rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+.xenos-input, .xenos-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: #0d1128;
+    color: var(--color-text);
+    border: 1px solid var(--color-neon-blue);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-family: monospace;
+    font-size: 0.98rem;
+    box-shadow: 0 0 16px #00adef22, inset 0 0 4px #00adef66;
+    animation: glitch-flicker 1.4s infinite alternate;
+}
+
+.xenos-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.xenos-response {
+    margin-top: 32px;
+    font-size: 1rem;
+    background: #0e132e;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #00adef44;
+    box-shadow: 0 0 24px #00adef22;
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.boot {
+    font-family: 'Orbitron', monospace;
+    color: var(--color-neon-blue);
+    animation: flicker 0.7s infinite alternate;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+@keyframes flicker {
+    from { opacity: 1; text-shadow: 0 0 6px #00adefaa; }
+    to { opacity: 0.6; text-shadow: 0 0 24px #007; }
+}
+
+@keyframes glitch-flicker {
+    0%   { box-shadow: 0 0 6px #00adef44; }
+    50%  { box-shadow: 0 0 14px #00adefaa, inset 0 0 8px #00adef88; }
+    100% { box-shadow: 0 0 6px #00adef44; }
+}
+
+.cta-btn {
+    border: 2px solid var(--color-neon-blue);
+    background: transparent;
+    color: var(--color-neon-blue);
+    border-radius: 32px;
+    padding: 16px 42px;
+    font-size: 1.14rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    box-shadow: 0 0 18px #00adef55;
+    text-shadow: 0 0 10px #00adefaa;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.cta-btn:hover, .cta-btn:focus {
+    background: var(--color-neon-blue);
+    color: #000025;
+    box-shadow: 0 0 44px #00adefff, 0 0 14px #00aaff77;
+}
