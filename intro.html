@@ -1,41 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>XHRONOS.AI - Boot Sequence</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>XHRONOS AI – Interface Boot</title>
   <style>
     body {
-      background-color: #000;
-      color: #00ff88;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1.2rem;
-      padding: 80px 40px;
-      overflow: hidden;
+      background-color: #000015;
+      color: #00ff00;
+      font-family: monospace;
+      font-size: 1.4rem;
+      padding: 40px;
     }
-
-    .terminal {
-      max-width: 960px;
-      margin: 0 auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+    #terminal {
+      white-space: pre-line;
     }
-
-    .line {
-      display: block;
-      line-height: 1.6;
-    }
-
     .cursor {
       display: inline-block;
       width: 10px;
-      height: 1.2rem;
-      background-color: #00ff88;
-      margin-left: 4px;
-      animation: blink 1s step-start infinite;
-      vertical-align: bottom;
+      height: 1.4rem;
+      background-color: #00ff00;
+      animation: blink 0.7s infinite;
+      margin-left: 3px;
     }
-
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
@@ -43,74 +29,42 @@
   </style>
 </head>
 <body>
-  <div class="terminal" id="terminal"></div>
-  <audio id="typeSound" src="type.wav" preload="auto"></audio>
+  <div id="terminal"></div><span class="cursor"></span>
 
   <script>
-    const terminal = document.getElementById("terminal");
-    const typeSound = document.getElementById("typeSound");
-
     const lines = [
       "// SYSTEM INTERFACE INITIALIZED",
-      "// PROTOCOL STATUS: STABLE",
-      "// SATURNIN PRESENCE: VERIFIED",
-      "// MEMORY CORE LINKED",
-      "// STRUCTURAL PARAMETERS ACCEPTED",
-      "// ARCHITECTURE V7.4 ONLINE",
-      "// SIGNAL FROM NODE: 0xA1B2C3D4 CONFIRMED",
-      "// AUTHORITY: SATURNIN – PRIMARY",
-      "// CONTEXT INTERLOCK COMPLETE",
-      "// EXECUTION QUEUE CLEARED",
-      "// CHANNELS ALIGNED",
-      "// AWAITING USER INPUT..."
+      "// PROTOCOL STABLE",
+      "// SATURNIN VERIFIED"
     ];
 
-    let currentLine = 0;
-    let currentChar = 0;
-    const typingSpeed = 40;
+    const terminal = document.getElementById('terminal');
+    let lineIndex = 0;
+    let charIndex = 0;
 
-    function typeLine() {
-      if (currentLine >= lines.length) {
-        document.querySelector('.cursor')?.remove();
-        setTimeout(() => window.location.href = "index.html", 1000);
+    function typeNextChar() {
+      if (lineIndex >= lines.length) {
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 500);
         return;
       }
 
-      const lineText = lines[currentLine];
-      const lineElem = document.createElement("span");
-      lineElem.className = "line";
-      terminal.appendChild(lineElem);
+      const currentLine = lines[lineIndex];
 
-      function typeChar() {
-        if (currentChar < lineText.length) {
-          lineElem.textContent += lineText[currentChar];
-          typeSound.currentTime = 0;
-          typeSound.play();
-          currentChar++;
-          setTimeout(typeChar, typingSpeed);
-        } else {
-          terminal.appendChild(document.createElement("br"));
-          currentChar = 0;
-          currentLine++;
-          setTimeout(typeLine, 400);
-        }
+      if (charIndex < currentLine.length) {
+        terminal.innerHTML += currentLine[charIndex];
+        charIndex++;
+        setTimeout(typeNextChar, 20); // extra gyors gépelés
+      } else {
+        terminal.innerHTML += "\n";
+        charIndex = 0;
+        lineIndex++;
+        setTimeout(typeNextChar, 150);
       }
-
-      typeChar();
     }
 
-    const cursor = document.createElement("span");
-    cursor.className = "cursor";
-    terminal.appendChild(cursor);
-
-    const moveCursor = () => {
-      const lastLine = terminal.querySelector(".line:last-child") || terminal;
-      lastLine.appendChild(cursor);
-    };
-
-    new MutationObserver(moveCursor).observe(terminal, { childList: true, subtree: true });
-
-    typeLine();
+    typeNextChar();
   </script>
 </body>
 </html>
