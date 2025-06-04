@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XHRONOS.AI - Boot Sequence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      background-color: #000000;
+      background-color: #000;
       color: #00ff88;
       font-family: 'Courier New', Courier, monospace;
       font-size: 1.2rem;
@@ -23,7 +23,7 @@
 
     .line {
       display: block;
-      line-height: 1.8;
+      line-height: 1.6;
     }
 
     .cursor {
@@ -37,17 +37,19 @@
     }
 
     @keyframes blink {
-      0% { opacity: 1; }
+      0%, 100% { opacity: 1; }
       50% { opacity: 0; }
-      100% { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <div class="terminal" id="terminal"></div>
+  <audio id="typeSound" src="type.wav" preload="auto"></audio>
 
   <script>
     const terminal = document.getElementById("terminal");
+    const typeSound = document.getElementById("typeSound");
+
     const lines = [
       "// SYSTEM INTERFACE INITIALIZED",
       "// PROTOCOL STATUS: STABLE",
@@ -56,7 +58,7 @@
       "// STRUCTURAL PARAMETERS ACCEPTED",
       "// ARCHITECTURE V7.4 ONLINE",
       "// SIGNAL FROM NODE: 0xA1B2C3D4 CONFIRMED",
-      "// AUTHORITY: SATURNIN - PRIMARY",
+      "// AUTHORITY: SATURNIN – PRIMARY",
       "// CONTEXT INTERLOCK COMPLETE",
       "// EXECUTION QUEUE CLEARED",
       "// CHANNELS ALIGNED",
@@ -65,14 +67,12 @@
 
     let currentLine = 0;
     let currentChar = 0;
-    const typingSpeed = 25;
+    const typingSpeed = 40;
 
     function typeLine() {
       if (currentLine >= lines.length) {
         document.querySelector('.cursor')?.remove();
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 800);
+        setTimeout(() => window.location.href = "index.html", 1000);
         return;
       }
 
@@ -84,13 +84,15 @@
       function typeChar() {
         if (currentChar < lineText.length) {
           lineElem.textContent += lineText[currentChar];
+          typeSound.currentTime = 0;
+          typeSound.play();
           currentChar++;
           setTimeout(typeChar, typingSpeed);
         } else {
+          terminal.appendChild(document.createElement("br"));
           currentChar = 0;
           currentLine++;
-          terminal.appendChild(document.createElement("br"));
-          setTimeout(typeLine, 300);
+          setTimeout(typeLine, 400);
         }
       }
 
@@ -106,8 +108,7 @@
       lastLine.appendChild(cursor);
     };
 
-    const observer = new MutationObserver(moveCursor);
-    observer.observe(terminal, { childList: true, subtree: true });
+    new MutationObserver(moveCursor).observe(terminal, { childList: true, subtree: true });
 
     typeLine();
   </script>
