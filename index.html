@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XHRONOS AI – Interface Boot</title>
+  <style>
+    body {
+      background-color: #000015;
+      color: #00ff00;
+      font-family: monospace;
+      font-size: 1.4rem;
+      padding: 40px;
+    }
+    #terminal {
+      white-space: pre-line;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.4rem;
+      background-color: #00ff00;
+      animation: blink 0.7s infinite;
+      margin-left: 3px;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div><span class="cursor"></span>
+
+  <script>
+    const lines = [
+      "// SYSTEM INTERFACE INITIALIZED",
+      "// PROTOCOL STABLE",
+      "// SATURNIN VERIFIED"
+    ];
+
+    const terminal = document.getElementById('terminal');
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeNextChar() {
+      if (lineIndex >= lines.length) {
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 500);
+        return;
+      }
+
+      const currentLine = lines[lineIndex];
+
+      if (charIndex < currentLine.length) {
+        terminal.innerHTML += currentLine[charIndex];
+        charIndex++;
+        setTimeout(typeNextChar, 20); // extra gyors gépelés
+      } else {
+        terminal.innerHTML += "\n";
+        charIndex = 0;
+        lineIndex++;
+        setTimeout(typeNextChar, 150);
+      }
+    }
+
+    typeNextChar();
+  </script>
+</body>
+</html>
