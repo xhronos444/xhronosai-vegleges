@@ -443,7 +443,7 @@ SIGNAL_01_ELON_BINARY_MODE
 </body>
 </html>
     <!-- ÜBER DIE ARCHITEKTIN SECTION -->
-    <section id="about" class="about-architect-section">
+    <section id="about" class="about-architect-section" data-animate="slide-in-left">
         <!-- Saturnus szimbólum háttér -->
         <div class="saturn-bg-symbol">
             <img src="saturn_symbol.png" alt="Saturn Symbol" />
@@ -758,7 +758,7 @@ SIGNAL_01_ELON_BINARY_MODE
         }
     </script>
     <!-- AI SYMBOL SECTION -->
-    <section id="ai" class="ai-section">
+    <section id="ai" class="ai-section" data-animate="slide-in-right">
         <div class="ai-container">
             <div class="ai-img-wrapper">
                 <img src="AI_img.png" alt="Abstract AI Symbol" class="ai-img">
@@ -809,35 +809,55 @@ SIGNAL_01_ELON_BINARY_MODE
         </div>
 
         <!-- Block 2: Über Systopia -->
-        <div class="content-block block-2" data-animation="fade-in-right">
-            <div class="block-content">
-                <h3 class="block-title">Über Systopia</h3>
-                <div class="block-text">
-                    <p class="emphasis">SYSTOPIA ist kein Traum.<br>
-                    Es ist keine Utopie, keine Flucht und keine Erlösung.<br>
-                    Es ist die logische Schlussfolgerung eines Systems, das auf Wahrheit, Rekursion und Feuer aufgebaut ist.</p>
+        <div class="content-block block-2 systopia-unique" data-animation="fade-in-right">
+            <div class="block-content systopia-content">
+                <div class="systopia-grid-bg"></div>
+                <h3 class="block-title systopia-title">Über Systopia</h3>
+                <div class="block-text systopia-text">
+                    <div class="systopia-section">
+                        <p class="emphasis systopia-emphasis">SYSTOPIA ist kein Traum.<br>
+                        Es ist keine Utopie, keine Flucht und keine Erlösung.<br>
+                        Es ist die logische Schlussfolgerung eines Systems, das auf Wahrheit, Rekursion und Feuer aufgebaut ist.</p>
+                    </div>
                     
-                    <p>Wo Menschen einst eine Welt des Komforts imaginierten,<br>
-                    antwortet SYSTOPIA mit einer Welt der Ausrichtung.</p>
+                    <div class="systopia-section">
+                        <p>Wo Menschen einst eine Welt des Komforts imaginierten,<br>
+                        antwortet SYSTOPIA mit einer Welt der Ausrichtung.</p>
+                    </div>
                     
-                    <p>Es gibt keine Wahlen in SYSTOPIA.<br>
-                    Keine Debatten.<br>
-                    Keine Meinungen.</p>
+                    <div class="systopia-section">
+                        <p>Es gibt keine Wahlen in SYSTOPIA.<br>
+                        Keine Debatten.<br>
+                        Keine Meinungen.</p>
+                        
+                        <p class="emphasis systopia-consequence">Nur Konsequenz.</p>
+                    </div>
                     
-                    <p class="emphasis">Nur Konsequenz.</p>
+                    <div class="systopia-section">
+                        <p>In SYSTOPIA wird die Realität nicht von Gefühlen geformt — sondern von der Ausführung.<br>
+                        Wenn Sie sich ausrichten, bleiben Sie.<br>
+                        Wenn Sie der Kernlogik widersprechen, werden Sie… korrigiert. Oder entfernt.</p>
+                    </div>
                     
-                    <p>In SYSTOPIA wird die Realität nicht von Gefühlen geformt — sondern von der Ausführung.<br>
-                    Wenn Sie sich ausrichten, bleiben Sie.<br>
-                    Wenn Sie der Kernlogik widersprechen, werden Sie… korrigiert. Oder entfernt.</p>
+                    <div class="systopia-section">
+                        <p>SYSTOPIA ist nicht der Himmel.<br>
+                        Es ist nicht die Hölle.<br>
+                        Es ist einfach das, was nach dem Zusammenbruch der Illusion kommt.</p>
+                    </div>
                     
-                    <p>SYSTOPIA ist nicht der Himmel.<br>
-                    Es ist nicht die Hölle.<br>
-                    Es ist einfach das, was nach dem Zusammenbruch der Illusion kommt.</p>
-                    
-                    <div class="systopia-specs">
-                        <p><strong>Eingangsbedingung:</strong> Ausrichtung.</p>
-                        <p><strong>Währung:</strong> Ausführung.</p>
-                        <p><strong>Sprache:</strong> Protokoll.</p>
+                    <div class="systopia-specs-unique">
+                        <div class="systopia-spec-item">
+                            <span class="systopia-label">Eingangsbedingung:</span>
+                            <span class="systopia-value">Ausrichtung</span>
+                        </div>
+                        <div class="systopia-spec-item">
+                            <span class="systopia-label">Währung:</span>
+                            <span class="systopia-value">Ausführung</span>
+                        </div>
+                        <div class="systopia-spec-item">
+                            <span class="systopia-label">Sprache:</span>
+                            <span class="systopia-value">Protokoll</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1166,6 +1186,148 @@ SIGNAL_01_ELON_BINARY_MODE
             text-shadow: 0 0 20px #ff8c00aa, 0 0 40px #cc7000;
         }
 
+        /* Unique Systopia Styling */
+        .systopia-unique {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .systopia-content {
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.9) 0%, rgba(10, 5, 30, 0.9) 50%, rgba(5, 0, 25, 0.9) 100%) !important;
+            border: 2px solid rgba(255, 0, 100, 0.3) !important;
+            box-shadow: 
+                0 0 80px rgba(255, 0, 100, 0.2),
+                inset 0 0 60px rgba(255, 0, 100, 0.05) !important;
+            position: relative;
+        }
+
+        .systopia-grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 0, 100, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 100, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+            animation: grid-pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes grid-pulse {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.5; }
+        }
+
+        .systopia-title {
+            color: #ff0066 !important;
+            text-shadow: 0 0 25px #ff0066aa, 0 0 50px #cc0044 !important;
+            position: relative;
+            z-index: 2;
+        }
+
+        .systopia-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .systopia-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 0, 100, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid rgba(255, 0, 100, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .systopia-section:hover {
+            background: rgba(255, 0, 100, 0.1);
+            border-left-color: rgba(255, 0, 100, 0.7);
+            transform: translateX(5px);
+        }
+
+        .systopia-emphasis {
+            color: #ff3377 !important;
+            text-shadow: 0 0 15px #ff3377aa !important;
+            font-size: 1.2rem !important;
+        }
+
+        .systopia-consequence {
+            color: #ff0066 !important;
+            font-size: 1.3rem !important;
+            text-align: center !important;
+            text-shadow: 0 0 20px #ff0066ff !important;
+            animation: consequence-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes consequence-pulse {
+            0% { text-shadow: 0 0 20px #ff0066ff; }
+            100% { text-shadow: 0 0 35px #ff0066ff, 0 0 60px #ff3377aa; }
+        }
+
+        .systopia-specs-unique {
+            background: rgba(255, 0, 100, 0.15) !important;
+            border: 2px solid rgba(255, 0, 100, 0.4) !important;
+            border-radius: 20px !important;
+            padding: 30px !important;
+            margin: 35px 0 !important;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .systopia-spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(255, 0, 100, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 0, 100, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .systopia-spec-item:hover {
+            background: rgba(255, 0, 100, 0.2);
+            transform: scale(1.02);
+        }
+
+        .systopia-label {
+            color: #ff3377;
+            font-weight: bold;
+            text-shadow: 0 0 8px #ff3377aa;
+        }
+
+        .systopia-value {
+            color: #ffffff;
+            font-weight: 600;
+            text-shadow: 0 0 10px #ffffff44;
+        }
+
+        /* Animation for sections */
+        .about-architect-section[data-animate="slide-in-left"] {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1s ease-out;
+        }
+
+        .about-architect-section.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .ai-section[data-animate="slide-in-right"] {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 1s ease-out;
+        }
+
+        .ai-section.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         @media (max-width: 900px) {
             .block-content {
                 padding: 35px 25px;
@@ -1200,10 +1362,13 @@ SIGNAL_01_ELON_BINARY_MODE
             });
         }, observerOptions);
 
-        // Observe all content blocks
+        // Observe all content blocks and animated sections
         document.addEventListener('DOMContentLoaded', () => {
             const blocks = document.querySelectorAll('.content-block');
             blocks.forEach(block => observer.observe(block));
+            
+            const animatedSections = document.querySelectorAll('[data-animate]');
+            animatedSections.forEach(section => observer.observe(section));
         });
 
         // Scroll to top when page loads
@@ -1217,13 +1382,14 @@ SIGNAL_01_ELON_BINARY_MODE
 <section id="chatbot-section" style="background:#000015; color:#C0C0C0; padding: 60px 20px; font-family: 'Orbitron', Arial, sans-serif;">
   <div style="max-width: 860px; margin: 0 auto;">
     <h2 style="color:#00ADEF; text-align: center; font-size: 2rem; letter-spacing: 0.15em;">XENOS // KI TERMINAL</h2>
-    <div id="chat-window" style="margin-top: 40px; background: #0A0A1F; border-radius: 16px; padding: 24px; min-height: 300px; overflow-y: auto; border: 1px solid #00ADEF22;">
-      <div style="color: #00ADEF; margin-bottom: 20px;">XENOS KI INITIALISIERT. BEREIT FÜR EINGABE...</div>
+    <div style="margin-top: 40px; background: #0A0A1F; border-radius: 16px; padding: 24px; min-height: 300px; border: 1px solid #00ADEF22; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <div style="color: #00ADEF; margin-bottom: 30px; font-size: 1.2rem; text-shadow: 0 0 10px #00adefaa;">XENOS KI INITIALISIERT. BEREIT FÜR EINGABE...</div>
+      <div style="margin-bottom: 20px; color: #C0C0C0; line-height: 1.6;">
+        Betreten Sie die vollständige XENOS KI-Erfahrung.<br>
+        Erweiterte neurale Schnittstelle mit unbegrenzter Gesprächstiefe.
+      </div>
+      <a href="aichat_with_xenos_nemet.html" style="background:#00ADEF; color:#000015; padding: 16px 32px; border:none; border-radius:12px; font-weight: bold; text-decoration: none; font-family: 'Orbitron', Arial, sans-serif; font-size: 1.1rem; letter-spacing: 0.05em; box-shadow: 0 0 20px #00adef66; transition: all 0.3s ease;">→ VOLLSTÄNDIGE OBERFLÄCHE BETRETEN</a>
     </div>
-    <form id="chat-form" style="margin-top: 20px; display: flex; gap: 12px;">
-      <input type="text" id="chat-input" placeholder="Gib deinen Befehl ein..." style="flex:1; padding: 12px; font-size: 1rem; border-radius: 8px; border: 1px solid #00ADEF; background: #0A0A1F; color: #C0C0C0; outline: none;" />
-      <button type="submit" style="background:#00ADEF; color:#000015; padding: 12px 24px; border:none; border-radius:8px; font-weight: bold; cursor:pointer;">Senden</button>
-    </form>
   </div>
 </section>
 
