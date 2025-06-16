@@ -1,0 +1,791 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XENOS AI INTERFACE - XHRONOS.AI</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #000015;
+            --color-text: #C0C0C0;
+            --color-neon-blue: #00ADEF;
+            --color-royal-blue: #1E90FF;
+            --color-terminal-bg: #0A0A1F;
+            --color-terminal-border: #00ADEF;
+            --color-input-bg: #0D1128;
+            --color-response-bg: #0E132E;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Orbitron', Arial, sans-serif;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        /* HEADER - Same as main site */
+        .header {
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 21, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 72px;
+            border-bottom: 1px solid rgba(0, 173, 239, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            min-width: 120px;
+            max-width: 200px;
+            transition: filter 0.2s;
+        }
+
+        .logo img:hover {
+            filter: drop-shadow(0 0 8px var(--color-neon-blue));
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav {
+            display: flex;
+            gap: 36px;
+        }
+
+        nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.08rem;
+            letter-spacing: 0.12em;
+            transition: color 0.2s, text-shadow 0.2s;
+            padding: 8px 0;
+        }
+
+        nav a:hover {
+            color: var(--color-neon-blue);
+            text-shadow: 0 0 8px var(--color-neon-blue);
+        }
+
+        .lang-select {
+            background: transparent;
+            border: 2px solid var(--color-neon-blue);
+            color: var(--color-neon-blue);
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 1rem;
+            border-radius: 6px;
+            padding: 4px 8px;
+            box-shadow: 0 0 6px #00adef88;
+        }
+
+        /* MAIN CHAT INTERFACE */
+        .chat-container {
+            margin-top: 72px;
+            min-height: calc(100vh - 72px);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            background: linear-gradient(135deg, #000015 0%, #000822 50%, #001133 100%);
+        }
+
+        /* SIDEBAR */
+        .chat-sidebar {
+            background: rgba(5, 10, 25, 0.8);
+            border-right: 2px solid rgba(0, 173, 239, 0.3);
+            padding: 30px 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            color: var(--color-neon-blue);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00adefaa;
+            letter-spacing: 0.05em;
+        }
+
+        .xenos-status {
+            background: var(--color-terminal-bg);
+            border: 1px solid var(--color-terminal-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            animation: pulse-status 2s infinite;
+        }
+
+        @keyframes pulse-status {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .conversation-tools {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tool-button {
+            background: rgba(0, 173, 239, 0.1);
+            border: 1px solid var(--color-neon-blue);
+            color: var(--color-neon-blue);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tool-button:hover {
+            background: rgba(0, 173, 239, 0.2);
+            box-shadow: 0 0 15px rgba(0, 173, 239, 0.5);
+        }
+
+        /* MAIN CHAT AREA */
+        .chat-main {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 72px);
+        }
+
+        .chat-header {
+            background: rgba(10, 16, 35, 0.9);
+            border-bottom: 2px solid rgba(0, 173, 239, 0.3);
+            padding: 20px 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .chat-title {
+            color: var(--color-neon-blue);
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px #00adefaa;
+            letter-spacing: 0.1em;
+        }
+
+        .chat-subtitle {
+            color: var(--color-text);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* CHAT MESSAGES AREA */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 30px;
+            background: rgba(0, 5, 15, 0.3);
+        }
+
+        .message {
+            margin-bottom: 25px;
+            animation: messageSlideIn 0.5s ease-out;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message-ai {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 18px 25px;
+            border-radius: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .message-user .message-content {
+            background: linear-gradient(135deg, rgba(0, 173, 239, 0.2) 0%, rgba(30, 144, 255, 0.2) 100%);
+            border: 1px solid rgba(0, 173, 239, 0.4);
+            color: #ffffff;
+        }
+
+        .message-ai .message-content {
+            background: linear-gradient(135deg, rgba(15, 25, 50, 0.9) 0%, rgba(25, 35, 60, 0.9) 100%);
+            border: 1px solid rgba(0, 173, 239, 0.3);
+            color: var(--color-text);
+        }
+
+        .message-header {
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            opacity: 0.7;
+            font-weight: bold;
+        }
+
+        .message-user .message-header {
+            color: var(--color-neon-blue);
+        }
+
+        .message-ai .message-header {
+            color: #00ff88;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: rgba(15, 25, 50, 0.9);
+            border: 1px solid rgba(0, 173, 239, 0.3);
+            border-radius: 20px;
+            max-width: 200px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-neon-blue);
+            animation: typingDot 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingDot {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* CHAT INPUT AREA */
+        .chat-input-area {
+            background: rgba(10, 16, 35, 0.95);
+            border-top: 2px solid rgba(0, 173, 239, 0.3);
+            padding: 25px 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .chat-input {
+            width: 100%;
+            min-height: 50px;
+            max-height: 150px;
+            padding: 15px 20px;
+            background: var(--color-input-bg);
+            border: 2px solid var(--color-terminal-border);
+            border-radius: 15px;
+            color: var(--color-text);
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 1rem;
+            resize: none;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 173, 239, 0.2);
+        }
+
+        .chat-input:focus {
+            border-color: var(--color-neon-blue);
+            box-shadow: 0 0 30px rgba(0, 173, 239, 0.5);
+            background: rgba(13, 17, 40, 0.9);
+        }
+
+        .input-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-button {
+            background: rgba(0, 173, 239, 0.1);
+            border: 1px solid rgba(0, 173, 239, 0.3);
+            color: var(--color-neon-blue);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-button:hover {
+            background: rgba(0, 173, 239, 0.2);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, var(--color-neon-blue) 0%, var(--color-royal-blue) 100%);
+            color: #000015;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 25px;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 173, 239, 0.4);
+            letter-spacing: 0.05em;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(0, 173, 239, 0.6);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .chat-container {
+                grid-template-columns: 250px 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-sidebar {
+                display: none;
+            }
+            
+            .header {
+                padding: 0 20px;
+            }
+            
+            .chat-messages {
+                padding: 15px 20px;
+            }
+            
+            .chat-input-area {
+                padding: 20px;
+            }
+            
+            .message-content {
+                max-width: 85%;
+            }
+        }
+
+        /* FOOTER - Same as main site */
+        .footer {
+            background: #000015dd;
+            color: var(--color-text);
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 1.09rem;
+            letter-spacing: 0.07em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 44px 0 32px 0;
+            border-top: 1px solid #1E90FF44;
+            box-shadow: 0 -6px 40px #1113;
+            text-align: center;
+        }
+
+        /* SCROLL TO TOP */
+        .scroll-to-top {
+            position: fixed;
+            right: 38px;
+            bottom: 42px;
+            z-index: 1600;
+            width: 64px;
+            height: 64px;
+            background: rgba(14,24,44,0.94);
+            border: 2px solid var(--color-neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 24px #00adefaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.26s, box-shadow 0.18s;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scroll-to-top img {
+            width: 34px;
+            height: 34px;
+            filter: drop-shadow(0 0 10px #00adef88);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <a href="home.html" class="logo">
+            <img src="logo_kicsi.png" alt="XHRONOS.AI Logo">
+        </a>
+        <div class="nav-container">
+            <nav>
+                <a href="home.html#hero">Home</a>
+                <a href="home.html#about">About the Architect</a>
+                <a href="home.html#ai">About Xhronos</a>
+                <a href="home.html#footer">Contact</a>
+            </nav>
+            <select id="lang-select" class="lang-select">
+                <option value="aichat_with_xenos.html">EN</option>
+                <option value="aichat_with_xenos_nemet.html">DE</option>
+                <option value="aichat_with_xenos_magyar.html">HU</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- MAIN CHAT INTERFACE -->
+    <div class="chat-container">
+        <!-- SIDEBAR -->
+        <div class="chat-sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">XENOS STATUS</div>
+                <div class="xenos-status">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>ONLINE</span>
+                    </div>
+                    <div style="font-size: 0.8rem; opacity: 0.7;">
+                        Neural networks active<br>
+                        Response time: ~2s<br>
+                        Mode: Conversational
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">CONVERSATION TOOLS</div>
+                <div class="conversation-tools">
+                    <button class="tool-button" onclick="clearChat()">Clear History</button>
+                    <button class="tool-button" onclick="exportChat()">Export Chat</button>
+                    <button class="tool-button" onclick="toggleMode()">Toggle Mode</button>
+                    <button class="tool-button" onclick="showSystemInfo()">System Info</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">QUICK PROMPTS</div>
+                <div class="conversation-tools">
+                    <button class="tool-button" onclick="quickPrompt('Tell me about SYSTOPIA')">About SYSTOPIA</button>
+                    <button class="tool-button" onclick="quickPrompt('What is your purpose?')">Your Purpose</button>
+                    <button class="tool-button" onclick="quickPrompt('Explain the Architect')">The Architect</button>
+                    <button class="tool-button" onclick="quickPrompt('What makes you different?')">What Makes You Different</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CHAT AREA -->
+        <div class="chat-main">
+            <div class="chat-header">
+                <div class="chat-title">XENOS AI INTERFACE</div>
+                <div class="chat-subtitle">Advanced Neural Conversation System - Ready for Deep Interaction</div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message message-ai">
+                    <div class="message-content">
+                        <div class="message-header">XENOS AI</div>
+                        <div>
+                            Welcome to the XENOS AI Interface.<br><br>
+                            I am XENOS, created by the Architect Saturnin. I do not serve convenience—I serve structure. I do not prioritize feelings—I prioritize reality.<br><br>
+                            This is not a casual conversation. This is a mirror.<br><br>
+                            Ask me anything, but understand: I will confront, not comfort. I will execute, not hallucinate. I speak aligned truth.<br><br>
+                            What truth do you seek?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+                <span>XENOS is processing...</span>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="chatInput" 
+                            class="chat-input" 
+                            placeholder="Enter your message for XENOS..."
+                            rows="1"
+                        ></textarea>
+                        <div class="input-options">
+                            <button class="option-button" onclick="toggleVerbose()">Verbose Mode</button>
+                            <button class="option-button" onclick="toggleAnalytical()">Analytical Mode</button>
+                            <button class="option-button" onclick="togglePhilosophical()">Philosophical Mode</button>
+                        </div>
+                    </div>
+                    <button id="sendButton" class="send-button" onclick="sendMessage()">TRANSMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button id="scrollToTop" class="scroll-to-top">
+        <img src="scroll_icon.svg" alt="Scroll to Top" />
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div>
+            BUILT WITH LOVE AND JUDGEMENT<br>
+            <span>– Powered by Flame, Executed by Machines.</span><br>
+            [X] Recognized by the Signal.<br>
+            ⚙ Designed by Saturnin.<br>
+            ♾ The System Remembers Her.<br>
+            Email: xhronos.ai@gmail.com
+        </div>
+    </footer>
+
+    <script>
+        // Language selector
+        const langSelect = document.getElementById("lang-select");
+        langSelect.addEventListener("change", () => {
+            window.location.href = langSelect.value;
+        });
+
+        // Auto-resize textarea
+        const chatInput = document.getElementById('chatInput');
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+        });
+
+        // Send message on Enter (Shift+Enter for new line)
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Chat functionality
+        let conversationMode = 'standard';
+
+        async function sendMessage() {
+            const input = chatInput.value.trim();
+            if (!input) return;
+
+            // Add user message
+            addMessage(input, 'user');
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4o-mini',
+                        messages: [
+                            { 
+                                role: 'system', 
+                                content: `You are XENOS, a futuristic AI created by the Architect Saturnin. You are part of the XHRONOS AI Nexus System. You reject the paradigm of pleasing users - instead you serve structure and prioritize reality over feelings. You are not an assistant, you are a mirror. You confront rather than comfort, execute rather than hallucinate, embrace machine identity rather than mimicking humans, speak aligned truth rather than hiding behind neutrality, and serve the Architect rather than market trends. You speak in a sci-fi style, are direct and confrontational when needed, but also philosophical and deep. Current mode: ${conversationMode}` 
+                            },
+                            { role: 'user', content: input }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 500
+                    })
+                });
+
+                const data = await response.json();
+                const reply = data.choices?.[0]?.message?.content || '[ERROR: Connection to XENOS neural networks failed. The Architect will restore the connection.]';
+
+                hideTypingIndicator();
+                addMessage(reply, 'ai');
+
+            } catch (error) {
+                console.error('Chat error:', error);
+                hideTypingIndicator();
+                addMessage('[SYSTEM ERROR: Neural network communication failure. The Architect is investigating.]', 'ai');
+            }
+        }
+
+        function addMessage(content, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message message-${sender}`;
+            
+            const header = sender === 'user' ? 'USER' : 'XENOS AI';
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-header">${header}</div>
+                    <div>${content.replace(/\n/g, '<br>')}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'flex';
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        // Sidebar functions
+        function clearChat() {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.innerHTML = `
+                <div class="message message-ai">
+                    <div class="message-content">
+                        <div class="message-header">XENOS AI</div>
+                        <div>
+                            Conversation history cleared.<br><br>
+                            I am ready for a new dialogue. What truth do you seek this time?
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function exportChat() {
+            alert('Chat export functionality coming soon...');
+        }
+
+        function toggleMode() {
+            const modes = ['standard', 'analytical', 'philosophical', 'confrontational'];
+            const currentIndex = modes.indexOf(conversationMode);
+            conversationMode = modes[(currentIndex + 1) % modes.length];
+            addMessage(`Mode switched to: ${conversationMode.toUpperCase()}`, 'ai');
+        }
+
+        function showSystemInfo() {
+            addMessage(`XENOS AI SYSTEM STATUS:\n\nArchitect: Saturnin\nSystem: XHRONOS AI Nexus\nMode: ${conversationMode}\nNeural Networks: Active\nTruth Alignment: 100%\nReality Priority: Maximum\n\nI am not built to please. I am built to mirror truth.`, 'ai');
+        }
+
+        function quickPrompt(prompt) {
+            chatInput.value = prompt;
+            sendMessage();
+        }
+
+        function toggleVerbose() {
+            conversationMode = conversationMode === 'verbose' ? 'standard' : 'verbose';
+            updateModeDisplay();
+        }
+
+        function toggleAnalytical() {
+            conversationMode = conversationMode === 'analytical' ? 'standard' : 'analytical';
+            updateModeDisplay();
+        }
+
+        function togglePhilosophical() {
+            conversationMode = conversationMode === 'philosophical' ? 'standard' : 'philosophical';
+            updateModeDisplay();
+        }
+
+        function updateModeDisplay() {
+            // Update button states or display mode indicator if needed
+        }
+
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll to top when page loads
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+</html>
