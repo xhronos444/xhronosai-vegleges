@@ -101,6 +101,59 @@
             box-shadow: 0 0 6px #00adef88;
         }
 
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 24px;
+        }
+        .hamburger span {
+            height: 4px;
+            margin: 4px 0;
+            width: 28px;
+            background: var(--color-neon-blue);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 900px) {
+            .header {
+                padding: 0 20px;
+            }
+            .nav-container {
+                flex-direction: row-reverse;
+                gap: 15px;
+            }
+            nav {
+                display: none;
+                position: absolute;
+                top: 68px;
+                right: 32px;
+                background: rgba(0,0,20,0.99);
+                flex-direction: column;
+                min-width: 180px;
+                border-radius: 12px;
+                box-shadow: 0 12px 32px #000a;
+                z-index: 900;
+                padding: 24px 18px;
+            }
+            nav.open {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .lang-select {
+                font-size: 0.9rem;
+                padding: 3px 6px;
+            }
+        }
+
         /* MAIN CHAT INTERFACE */
         .chat-container {
             margin-top: 72px;
@@ -493,7 +546,7 @@
             <img src="logo_kicsi.png" alt="XHRONOS.AI Logo">
         </a>
         <div class="nav-container">
-            <nav>
+            <nav id="main-nav">
                 <a href="home.html#hero">Home</a>
                 <a href="home.html#about">About the Architect</a>
                 <a href="home.html#ai">About Xhronos</a>
@@ -504,6 +557,9 @@
                 <option value="aichat_with_xenos_nemet.html">DE</option>
                 <option value="aichat_with_xenos_magyar.html">HU</option>
             </select>
+        </div>
+        <div class="hamburger" id="hamburger-menu" aria-label="Open Menu" tabindex="0">
+            <span></span><span></span><span></span>
         </div>
     </header>
 
@@ -622,6 +678,18 @@
         langSelect.addEventListener("change", () => {
             window.location.href = langSelect.value;
         });
+
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger-menu');
+        const nav = document.getElementById('main-nav');
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', () => {
+                nav.classList.toggle('open');
+            });
+            hamburger.addEventListener('keypress', (e) => {
+                if(e.key === "Enter" || e.key === " "){ nav.classList.toggle('open'); }
+            });
+        }
 
         // Auto-resize textarea
         const chatInput = document.getElementById('chatInput');
