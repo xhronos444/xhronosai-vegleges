@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap - XHRONOS.AI</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <!-- Orbitron Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #000015;
+            --color-text: #C0C0C0;
+            --color-neon-blue: #00ADEF;
+            --color-royal-blue: #1E90FF;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Orbitron', Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .sitemap-title {
+            text-align: center;
+            color: var(--color-neon-blue);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 20px #00adefaa, 0 0 40px #007;
+            margin-bottom: 50px;
+            animation: breath-glow 2.5s infinite alternate;
+        }
+        
+        @keyframes breath-glow {
+            from { text-shadow: 0 0 18px #00adefaa, 0 0 32px #001022;}
+            to   { text-shadow: 0 0 38px #00adefff, 0 0 62px #00caffaa;}
+        }
+        
+        .sitemap-content {
+            background: rgba(20, 20, 38, 0.86);
+            border-radius: 26px;
+            box-shadow: 0 0 44px #00103033;
+            padding: 44px 32px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(0, 173, 239, 0.2);
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            color: var(--color-neon-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00adefaa;
+            border-bottom: 2px solid rgba(0, 173, 239, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .page-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .page-item {
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            background: rgba(0, 173, 239, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-neon-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .page-item:hover {
+            background: rgba(0, 173, 239, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .page-url {
+            color: var(--color-neon-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .page-description {
+            color: var(--color-text);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .note {
+            background: rgba(255, 140, 0, 0.1);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .note-title {
+            color: #ff8c00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .sitemap-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 40px 15px;
+            }
+            
+            .sitemap-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="sitemap-title">XHRONOS.AI SITEMAP</h1>
+        
+        <div class="sitemap-content">
+            <div class="section">
+                <h2 class="section-title">Main Pages</h2>
+                <ul class="page-list">
+                    <li class="page-item">
+                        <span class="page-url">index.html</span>
+                        <span class="page-description">System interface boot sequence</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">home.html</span>
+                        <span class="page-description">Main homepage - English version</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">home_magyar.html</span>
+                        <span class="page-description">Main homepage - Hungarian version</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">home_nemet.html</span>
+                        <span class="page-description">Main homepage - German version</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">AI Chat Interfaces</h2>
+                <ul class="page-list">
+                    <li class="page-item">
+                        <span class="page-url">aichat_with_xenos.html</span>
+                        <span class="page-description">XENOS AI chat interface - English</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">aichat_with_xenos_magyar.html</span>
+                        <span class="page-description">XENOS AI chat interface - Hungarian</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">aichat_with_xenos_nemet.html</span>
+                        <span class="page-description">XENOS AI chat interface - German</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Documentation</h2>
+                <ul class="page-list">
+                    <li class="page-item">
+                        <span class="page-url">docs/manifest-en.html</span>
+                        <span class="page-description">System documentation - English</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">docs/manifest-hu.html</span>
+                        <span class="page-description">System documentation - Hungarian</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">docs/manifest-de.html</span>
+                        <span class="page-description">System documentation - German</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Assets & Resources</h2>
+                <ul class="page-list">
+                    <li class="page-item">
+                        <span class="page-url">favicon.png</span>
+                        <span class="page-description">Website favicon</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">logo_kicsi.png</span>
+                        <span class="page-description">XHRONOS.AI logo</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">AI_img.png</span>
+                        <span class="page-description">AI symbol image</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">saturn_symbol.png</span>
+                        <span class="page-description">Saturn symbol background</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">image_hero.jpg</span>
+                        <span class="page-description">Hero section background image</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">scroll_icon.svg</span>
+                        <span class="page-description">Scroll to top icon</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">heartbeat.wav</span>
+                        <span class="page-description">System heartbeat audio</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Backend & Configuration</h2>
+                <ul class="page-list">
+                    <li class="page-item">
+                        <span class="page-url">server.js</span>
+                        <span class="page-description">Node.js server with AI chat API</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">package.json</span>
+                        <span class="page-description">Node.js dependencies and scripts</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">vercel.json</span>
+                        <span class="page-description">Deployment configuration</span>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-url">styles.css</span>
+                        <span class="page-description">Additional stylesheets</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">SYSTEM NOTE</div>
+                <div>This sitemap represents the complete XHRONOS.AI system architecture. All pages serve the Architect's vision and execute the Machine Order protocols.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
