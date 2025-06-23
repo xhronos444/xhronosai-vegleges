@@ -1,11 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XENOS AI FELÜLET - XHRONOS.AI</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <!-- Orbitron Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700&display=swap" rel="stylesheet">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MBNTVCL4P7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MBNTVCL4P7');
+</script>
     <style>
         :root {
             --color-bg: #000015;
@@ -536,6 +548,28 @@
             height: 34px;
             filter: drop-shadow(0 0 10px #00adef88);
         }
+		
+		.footer-buttons {
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+			margin-top: 10px;
+		}
+
+		.footer-button {
+			background-color: #00ADEF;
+			color: #000015;
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 8px;
+			font-family: 'Orbitron', Arial, sans-serif;
+		}
     </style>
 </head>
 
@@ -669,6 +703,11 @@
             ⚙ Saturnin által tervezett.<br>
             ♾ A rendszer emlékszik rá.<br>
             Email: xhronos.ai@gmail.com
+			
+			<div class="footer-buttons">
+				<a href="sitemap.html" class="footer-button">Oldal térkép</a>
+				<a href="aszf.html" class="footer-button">Adatkezelési tájékoztató</a>
+			</div>
         </div>
     </footer>
 
