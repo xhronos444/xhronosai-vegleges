@@ -1,5 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/intro.html" }
-  ]
+  "functions": {
+    "api/chat.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
